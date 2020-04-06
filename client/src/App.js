@@ -20,21 +20,13 @@ function App() {
         // handle error
         console.log(error);
       });
-  }, [pets, setPets]);
-
-  const sortById = () => {
-    pets.reverse();
-  };
+  }, []);
 
   return (
     <div className="App">
       <Router>
         <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => <Pets pets={pets} sortById={sortById} />}
-          />
+          <Route exact path="/" render={() => <Pets pets={pets} />} />
           <Route path="/:id" component={PetInfo} />
         </Switch>
       </Router>

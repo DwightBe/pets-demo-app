@@ -4,28 +4,59 @@ import { Link } from "react-router-dom";
 
 export default function PetsTable(props) {
   const [page, setPage] = useState(0);
-  const pages = Math.ceil(props.pets.length / 10);
+  const [whichSort, setWhichSort] = useState("id");
+  const [sortById, setSortById] = useState(false);
+  const [sortByName, setSortByName] = useState(false);
+
+  let pets = props.pets;
+  const pages = Math.ceil(pets.length / 10);
+
+  if (whichSort === "id") {
+    if (sortById) {
+      pets.sort((a, b) => b.id - a.id);
+    } else pets.sort((a, b) => a.id - b.id);
+  } else {
+    if (sortByName) {
+      pets.sort((a, b) => a.name.localeCompare(b.name));
+    } else pets.sort((a, b) => b.name.localeCompare(a.name));
+  }
 
   return (
     <Table celled>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell onClick={props.sortById}>Id</Table.HeaderCell>
-          <Table.HeaderCell>Name</Table.HeaderCell>
+          <Table.HeaderCell
+            className="sort-header"
+            onClick={() => {
+              setWhichSort("id");
+              setSortById(!sortById);
+            }}
+          >
+            Id
+          </Table.HeaderCell>
+          <Table.HeaderCell
+            className="sort-header"
+            onClick={() => {
+              setWhichSort("name");
+              setSortByName(!sortByName);
+            }}
+          >
+            Name
+          </Table.HeaderCell>
         </Table.Row>
       </Table.Header>
 
       <Table.Body>
-        {props.pets.map((pet, key) =>
+        {pets.map((pet, key) =>
           key < (page + 1) * 10 && key >= page * 10 ? (
             <Table.Row>
               <Table.Cell>
-                <Link to={`/${key + 1}`}>
+                <Link to={`/${pet.id}`}>
                   <Label ribbon>{pet.id}</Label>
                 </Link>
               </Table.Cell>
               <Table.Cell>
-                <Link to={`/${key + 1}`}>{pet.name}</Link>
+                <Link to={`/${pet.id}`}>{pet.name}</Link>
               </Table.Cell>
             </Table.Row>
           ) : (
@@ -53,7 +84,7 @@ export default function PetsTable(props) {
               <Menu.Item icon>
                 <Icon
                   name="chevron right"
-                  disabled={page >= Math.ceil(props.pets.length / 10) - 1}
+                  disabled={page >= Math.ceil(pets.length / 10) - 1}
                   onClick={() => setPage(page + 1)}
                 />
               </Menu.Item>
