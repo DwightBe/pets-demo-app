@@ -11,6 +11,14 @@ export default function PetsTable(props) {
   let pets = props.pets;
   const pages = Math.ceil(pets.length / 10);
 
+  /***
+   * quick logic solution to sort, if I spent more time on this app,
+   * I want to use useContext to create one single source of truth for the
+   * state that would be able to sort pets from higher in context,
+   * instead of prop drilling, and using these bool states to determine
+   * sort order
+   */
+
   if (whichSort === "id") {
     if (sortById) {
       pets.sort((a, b) => b.id - a.id);
