@@ -23,7 +23,6 @@ export function PetInfo(props) {
       });
   }, []);
 
-  console.log(pet);
   return (
     <div className="details-page">
       <span>Here are the details of your pet.</span>

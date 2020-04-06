@@ -6,7 +6,7 @@ export function Pets(props) {
     <div className="pets-page">
       <h1>Pets</h1>
       <div className="pets-table">
-        <PetsTable pets={props.pets} />
+        <PetsTable pets={props.pets} sortById={props.sortById} />
       </div>
     </div>
   );

@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 export default function PetsTable(props) {
   const [page, setPage] = useState(0);
   const pages = Math.ceil(props.pets.length / 10);
+
   return (
     <Table celled>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell>Id</Table.HeaderCell>
+          <Table.HeaderCell onClick={props.sortById}>Id</Table.HeaderCell>
           <Table.HeaderCell>Name</Table.HeaderCell>
         </Table.Row>
       </Table.Header>
