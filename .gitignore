@@ -1,5 +1,6 @@
 # dependencies
 client/node_modules
+node-api-postgres/node_modules
 
 # misc
 .DS_Store
