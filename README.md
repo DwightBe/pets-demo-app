@@ -11,6 +11,6 @@ cd node-api-postgres
 node index.js
 
 To run Client:
-cd pets-app
+cd client
 npm install
 npm start
