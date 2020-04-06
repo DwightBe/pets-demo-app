@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import { Table, Label, Menu, Icon, Popup } from "semantic-ui-react";
-import { Details } from "./Details";
+import { Table, Label, Menu, Icon } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
-export function PetsTable(props) {
+export default function PetsTable(props) {
   const [page, setPage] = useState(0);
   const pages = Math.ceil(props.pets.length / 10);
-  console.log(props.pets);
   return (
     <Table celled>
       <Table.Header>
@@ -18,26 +17,16 @@ export function PetsTable(props) {
       <Table.Body>
         {props.pets.map((pet, key) =>
           key < (page + 1) * 10 && key >= page * 10 ? (
-            <Popup
-              className={"popup"}
-              content={
-                <Details
-                  id={pet.id}
-                  name={pet.name}
-                  weight={pet.weight}
-                  age={pet.age}
-                />
-              }
-              on="click"
-              trigger={
-                <Table.Row>
-                  <Table.Cell>
-                    <Label ribbon>{pet.id}</Label>
-                  </Table.Cell>
-                  <Table.Cell>{pet.name}</Table.Cell>
-                </Table.Row>
-              }
-            />
+            <Table.Row>
+              <Table.Cell>
+                <Link to={`/${key + 1}`}>
+                  <Label ribbon>{pet.id}</Label>
+                </Link>
+              </Table.Cell>
+              <Table.Cell>
+                <Link to={`/${key + 1}`}>{pet.name}</Link>
+              </Table.Cell>
+            </Table.Row>
           ) : (
             ""
           )

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Table, Label, Menu, Icon, Popup, Tab } from "semantic-ui-react";
-import { PetsTable } from "./components/PetsTable";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Pets } from "./pages/Pets";
+import { PetInfo } from "./pages/PetInfo";
 import "semantic-ui-css/semantic.min.css";
 import "./App.css";
 
@@ -14,15 +15,21 @@ function App() {
           headers: { "Access-Control-Allow-Origin": "*" },
         },
       })
-      .then((response) => setPets(response.data));
+      .then((response) => setPets(response.data))
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
   }, []);
 
-  const pages = Math.ceil(pets.length / 10);
   return (
     <div className="App">
-      <div className="pets-table">
-        <PetsTable pets={pets} />
-      </div>
+      <Router>
+        <Switch>
+          <Route exact path="/" render={() => <Pets pets={pets} />} />
+          <Route path="/:id" component={PetInfo} />
+        </Switch>
+      </Router>
     </div>
   );
 }

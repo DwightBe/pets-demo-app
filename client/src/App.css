@@ -1,13 +1,21 @@
 .App {
   text-align: center;
 }
-
+.pets-page {
+  margin: 20px;
+}
 .pets-table {
-  margin: 40px 100px;
+  margin: 20px auto;
+  width: 70%;
+  max-width: 500px;
+  text-align: center;
 }
 
-.popup {
-  width: 200px;
-  margin: 0 auto;
+.details-page {
+  margin: 20px;
+  text-align: left;
+}
+
+.card {
   text-align: center;
 }
