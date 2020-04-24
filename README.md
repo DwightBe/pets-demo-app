@@ -1,4 +1,4 @@
-# televet-pets-app
+# pets-demo-app
 televet pets demo app
 
 To Run:
